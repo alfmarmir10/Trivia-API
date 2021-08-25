@@ -104,6 +104,10 @@ body::-webkit-scrollbar {
     text-align: center;
 }
 
+.text-align-left{
+    text-align: left;
+}
+
 .margin-top-xs{
     margin-top: 1vh;
 }
@@ -344,6 +348,10 @@ body::-webkit-scrollbar {
 
 .color-white{
     color:white;
+}
+
+.color-crimson{
+    color:crimson;
 }
 
 .color-black{

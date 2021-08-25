@@ -20,14 +20,101 @@
 
 </head>
 <body>
-    <header class="flex-row-center">
+    <header class="general-header flex-row-center">
         <img src="./Assets/img/logo.png" alt="Trivia Logo" class="header-logo">
     </header>
-    <main>
-
+    <main class="general-main flex-column-start">
+        <div class="form-container flex-column-center width-80percent border-radious-10px box-shadow-normal padding-sm bg-dark-blue">
+            <div class="modal-input-label-container margin-top-sm flex-column-center width-100percent">
+                <input type="text" name="number-questions" id="number-questions" class="border-radious-5px" value="10" placeholder="Máximo 20" onchange="(this.value<1)?this.value = 1:this.value = this.value; (this.value>20)?this.value = 20:this.value = this.value" maxlength="2">
+                <label for="number-questions" class="font-size-sm font-weight-bold color-white">Número de Preguntas</label>
+            </div>
+            <div class="modal-input-label-container margin-top-sm flex-column-center width-100percent">
+                <select name="category" class="border-radious-5px width-80percent" id="category-select">
+                    <option value="0">Cualquier categoría</option>
+                    <option value="9">Cultura general</option>
+                    <option value="10">Libros</option>
+                    <option value="11">Películas</option>
+                    <option value="12">Música</option>
+                    <option value="13">Musicales y teatros</option>
+                    <option value="14">Televisión</option>
+                    <option value="15">Videojuegos</option>
+                    <option value="16">Juegos de mesa</option>
+                    <option value="17">Ciencia y naturaleza</option>
+                    <option value="18">Computación</option>
+                    <option value="19">Matemáticas</option>
+                    <option value="20">Mitología</option>
+                    <option value="21">Deportes</option>
+                    <option value="22">Geografía</option>
+                    <option value="23">Historia</option>
+                    <option value="24">Política</option>
+                    <option value="25">Arte</option>
+                    <option value="26">Celebridades</option>
+                    <option value="27">Animales</option>
+                    <option value="28">Autos</option>
+                    <option value="29">Comics</option>
+                    <option value="30">Gadgets</option>
+                    <option value="31">Ánime y manga</option>
+                    <option value="32">Caricaturas</option>
+                </select>
+                <label for="category" class="font-size-sm font-weight-bold color-white">Categoría</label>
+            </div>
+            <div class="modal-input-label-container margin-top-sm flex-column-center width-100percent">
+                <select name="difficulty" class="border-radious-5px width-80percent" id="difficulty-select">
+                    <option value="0">Cualquier dificultad</option>
+                    <option value="easy">Fácil</option>
+                    <option value="medium">Medio</option>
+                    <option value="hard">Difícil</option>
+                </select>
+                <label for="difficulty" class="font-size-sm font-weight-bold color-white">Dificultad</label>
+            </div>
+            <div class="modal-input-label-container margin-top-sm flex-column-center width-100percent">
+                <select name="type" class="border-radious-5px width-80percent" id="type-select">
+                    <option value="0">Cualquier tipo</option>
+                    <option value="multiple">Opción Múltiple</option>
+                    <option value="boolean">Verdadero / Falso</option>
+                </select>
+                <label for="type" class="font-size-sm font-weight-bold color-white">Tipo</label>
+            </div>
+            <button type="button" class="bg-yellow width-80percent padding-sm font-weight-bold font-size-md border-radious-10px box-shadow-normal margin-top-md margin-bottom-md" onclick="goToQuestions()">Generar Trivia</button>
+        </div>
     </main>
-    <footer>
-
+    <footer class="general-footer flex-column-center">
+        <p class="font-weight-thin font-size-sm text-align-center">Alfonso Martínez, 2021.</p>
     </footer>
+
+
+    <div class="toast hide" id="toastWelcome">
+        <div class="toast-title color-black font-size-md margin-top-sm font-weight-bold">¡Bienvenido!</div>
+        <div class="toast-subtitle color-black font-size-lg margin-top-sm margin-bottom-sm font-weight-500 flex-row-center"><img class="userPhoto" id="userPhoto" src="https://lh3.googleusercontent.com/a/AATXAJwkc6NKCfmkocURs42OO4aMBjKFff6OWRAy7v5Y=s96-c" alt="User Photo"> Alfonso</div>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            document.getElementsByClassName('toast-subtitle')[0].innerHTML = `<img class='userPhoto' id='userPhoto' src='${localStorage.getItem('userPhotoURL')}' alt='User Photo'>${localStorage.getItem('userShortName')}`;
+            document.getElementById('toastWelcome').classList.remove('hide');
+            setTimeout(()=>{
+                document.getElementById('toastWelcome').classList.add('hide');
+            }, 3000);
+        }
+
+        const numberQuestions = document.getElementById('number-questions');
+        numberQuestions.onkeydown = (e) =>{
+            var x = e.charCode || e.keyCode;
+            if (isNaN(String.fromCharCode(e.which)) && x!=8 && x!=37 && x!=39) e.preventDefault();
+        }
+
+        function goToQuestions(){
+            const amount = document.getElementById('number-questions').value;
+            const category = document.getElementById('category-select').value;
+            const difficulty = document.getElementById('difficulty-select').value;
+            const type = document.getElementById('type-select').value;
+
+            const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`;
+            localStorage.setItem('URL_API', url);
+            
+            location.href = "./questions.html";
+        }
+    </script>
 </body>
 </html>

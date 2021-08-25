@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <link rel="stylesheet" href="./Assets/css/styles.css">
+    <link rel="stylesheet" href="./Assets/css/styles_base.css">
+    <script type="text/javascript" src="./Assets/js/scripts.js"></script>
+    <link rel="icon" type="image/png" sizes="96x96" href="./Assets/img/favicon.ico">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+
+</head>
+<body>
+    <header class="general-header flex-row-center">
+        <img src="./Assets/img/logo.png" alt="Trivia Logo" class="header-logo">
+    </header>
+    <main class="general-main flex-column-start">
+        <div class="results-container flex-column-center border-radious-10px box-shadow-normal padding-sm bg-dark-blue">
+            <p class="porcentajeCalificacion hide" id='porcentajeCalificacion'>100%</p>
+            <p class="calificacionLabel font-weight-bold color-white font-size-md">Calificación</p>
+        </div>
+        <button type="button" class="bg-yellow width-80percent padding-sm font-weight-bold font-size-md border-radious-10px box-shadow-normal margin-top-sm margin-bottom-xs" onclick="location.href = 'home.html'">¡Otra vez!</button>
+    </main>
+    <footer class="general-footer flex-column-center">
+        <p class="font-weight-thin font-size-sm text-align-center">Alfonso Martínez, 2021.</p>
+    </footer>
+
+
+    <div class="toast hide" id="toastWelcome">
+        <div class="toast-title color-white font-size-md margin-top-sm font-weight-bold">¡Bienvenido!</div>
+        <div class="toast-subtitle color-white font-size-lg margin-top-sm margin-bottom-sm font-weight-500">Alfonso</div>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            printResult();
+        }
+        
+    </script>
+</body>
+</html>
