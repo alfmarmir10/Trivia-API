@@ -1,0 +1,30 @@
+.index-header{
+    height: 5vh;
+}
+
+.index-main{
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.index-footer{
+    height: 5vh;
+}
+
+.help-icon-container{
+    margin-right: 3vw;
+}
+
+.logo-index{
+    width: 90%;
+}
+
+.logo-index.small{
+    width: 60%;
+}
+
+.header-logo{
+    width: 20vw;
+    height: 20vw;
+    margin-top: 1vh;
+}

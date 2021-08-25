@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia API</title>
+    <link rel="stylesheet" href="./Assets/css/styles.css">
+    <link rel="stylesheet" href="./Assets/css/styles_base.css">
+    <script type="text/javascript" src="./Assets/js/scripts.js"></script>
+    <link rel="icon" type="image/png" sizes="96x96" href="./Assets/img/favicon.ico">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    
+    <script type="text/javascript" src="./Assets/js/firebase.js"></script>
+    <script type="text/javascript" src="./Assets/js/firebase-auth.js"></script>
+    <script src="https://kit.fontawesome.com/1a068ddec2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="index-header flex-row-end">
+        <div class="help-icon-container flex-column-center">
+            <i class="far fa-question-circle header-help-icon font-size-sm"></i>
+            <p class="text-sm">Ayuda</p>
+        </div>
+    </header>
+    <main class="index-main flex-column-center">
+        <img src="./Assets/img/logo.png" alt="" class="logo-index">
+        <button type="button" id="index-comenzar-button" class="bg-yellow width-50percent border-radious-10px padding-sm font-weight-500 font-size-md margin-top-md box-shadow-normal" onclick="triggerFirebaseAuth('./home.html')">¡Comenzar!</button>
+        <div id="modal-auth-container" class="modal-auth-container hidden">
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Cargando...</div>
+        </div>
+    </main>
+    <footer class="index-footer flex-column-center">
+        <p class="font-weight-thin font-size-sm text-align-center">Alfonso Martínez, 2021.</p>
+    </footer>
+    <script type="text/javascript">
+        function triggerFirebaseAuth(redirectURL){
+            document.getElementById('modal-auth-container').classList.remove('hidden');
+            document.getElementById('index-comenzar-button').classList.add('hidden');
+            loadFirebaseAuth(redirectURL);
+        }
+    </script>
+</body>
+</html>
