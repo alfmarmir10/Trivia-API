@@ -119,15 +119,21 @@ function printResult(){
     const result = Number(localStorage.getItem('correctAnswers'))/Number(localStorage.getItem('totalQuestions'));
     const percentaje = result * 100;
     let classToAdd = "color-white";
+    let imgCalif = '';
     if(percentaje <= 50){
         classToAdd = "color-red";
+        imgCalif = './Assets/img/calificaciones_bajo';
     } else if(percentaje > 50 && percentaje < 80){
         classToAdd = "color-gold";
+        imgCalif = './Assets/img/calificaciones_medio';
     } else if(percentaje >= 80 && percentaje <= 100){
         classToAdd = 'color-green';
+        imgCalif = './Assets/img/calificaciones_alto';
     }
     
     document.getElementById('porcentajeCalificacion').classList.add(classToAdd);
     document.getElementById('porcentajeCalificacion').classList.remove('hide');
+    document.getElementById('imgCalificacion').src = imgCalif+".png";
+    document.getElementById('imgCalificacion').classList.remove('hidden');
     document.getElementById('porcentajeCalificacion').innerText = percentaje.toFixed(0) + "%";
 }
