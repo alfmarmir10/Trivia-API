@@ -11,6 +11,50 @@
 let triviaResponse = [];
 let currentQuestion = 0;
 
+function fetchQuestionsBackend(){
+    if(localStorage.getItem('URL_API')!=undefined){
+        showLoader();
+        fetch('https://us-central1-trivia-f81c2.cloudfunctions.net/app/fetchQuestions',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: localStorage.getItem('URL_API')
+            })
+        })
+        .then(promise=>promise.json())
+        .then(obj=>{
+            console.log(obj);
+            if(obj.response_code == 1){
+                alert("No encontramos coincidencias con tu selección.");
+                location.href = 'home.html';
+                return;
+            }
+            obj.results.forEach(element => {
+                const item = {
+                    Question : element.question,
+                    Correct_Answer : element.correct_answer,
+                    Incorrect_Answers : element.incorrect_answers,
+                    Already_Answered: false,
+                    Correctly_Answered: '',
+                    Selected_Answer: '',
+                    Posible_Answers: element.correct_answer + "," +element.incorrect_answers
+                };
+                triviaResponse.push(item);
+            });
+            localStorage.removeItem('URL_API');
+            localStorage.setItem('totalQuestions', triviaResponse.length);
+            localStorage.setItem('correctAnswers', 0);
+            hideLoader();
+            startTrivia();
+        })
+        .catch(error=>console.error(error));
+    } else {
+        location.href = 'home.html';
+    }
+}
+
 function fetchQuestions () {
     if(localStorage.getItem('URL_API')!=undefined){
         fetch(localStorage.getItem('URL_API'))
@@ -136,4 +180,18 @@ function printResult(){
     document.getElementById('imgCalificacion').src = imgCalif+".png";
     document.getElementById('imgCalificacion').classList.remove('hidden');
     document.getElementById('porcentajeCalificacion').innerText = percentaje.toFixed(0) + "%";
+}
+
+function showLoader(){
+    const loaderContainer = document.getElementById(`loaderContainer`);
+    const loader = document.getElementById(`loader`);
+    loaderContainer.classList.remove('hidden');
+    loader.classList.add('loader');
+}
+
+function hideLoader(){
+    const loaderContainer = document.getElementById(`loaderContainer`);
+    const loader = document.getElementById(`loader`);
+    loaderContainer.classList.add('hidden');
+    loader.classList.remove('loader');
 }

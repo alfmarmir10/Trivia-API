@@ -17,10 +17,19 @@
     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-functions.js"></script>
 
+    <script type="text/javascript" src="./Assets/js/firebase.js"></script>
+    <script type="text/javascript" src="./Assets/js/firebase-auth.js"></script>
+    <script data-ad-client="ca-pub-5765110743587873" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <header class="general-header flex-row-center">
+        <div class="signOut-container flex-column-center position-absolute" onclick="signOut()">
+            <img src="./Assets/img/logout.png" alt="Salir imagen" class="singOut-img">
+            <p class="font-weight-bold font-size-sm text-align-center">Salir</p>
+        </div>
         <img src="./Assets/img/logo.png" alt="Trivia Logo" class="header-logo">
     </header>
     <main class="general-main flex-column-start">
@@ -86,16 +95,19 @@
 
     <div class="toast hide" id="toastWelcome">
         <div class="toast-title color-black font-size-md margin-top-sm font-weight-bold">¡Bienvenido!</div>
-        <div class="toast-subtitle color-black font-size-lg margin-top-sm margin-bottom-sm font-weight-500 flex-row-center"><img class="userPhoto" id="userPhoto" src="https://lh3.googleusercontent.com/a/AATXAJwkc6NKCfmkocURs42OO4aMBjKFff6OWRAy7v5Y=s96-c" alt="User Photo"> Alfonso</div>
+        <div class="toast-subtitle color-black font-size-lg margin-top-sm margin-bottom-sm font-weight-500 flex-row-center"><img class="userPhoto" id="userPhoto" src="./Assets/img/avatar.png" alt="User Photo"></div>
     </div>
 
     <script type="text/javascript">
         window.onload = () => {
-            document.getElementsByClassName('toast-subtitle')[0].innerHTML = `<img class='userPhoto' id='userPhoto' src='${localStorage.getItem('userPhotoURL')}' alt='User Photo'>${localStorage.getItem('userShortName')}`;
+            validateSession();
+            if(localStorage.getItem('userPhotoURL') != 'null'){
+                document.getElementsByClassName('toast-subtitle')[0].innerHTML = `<img class='userPhoto' id='userPhoto' src='${localStorage.getItem('userPhotoURL')}' alt='User Photo'>${localStorage.getItem('userShortName')}`;
+            }
             document.getElementById('toastWelcome').classList.remove('hide');
             setTimeout(()=>{
                 document.getElementById('toastWelcome').classList.add('hide');
-            }, 3000);
+            }, 3000);            
         }
 
         const numberQuestions = document.getElementById('number-questions');

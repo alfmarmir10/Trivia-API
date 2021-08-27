@@ -104,3 +104,9 @@ function signOut(){
             console.error(error);
         })
 }
+
+function validateSession(){
+    if(localStorage.getItem('userUUID')==undefined){
+        window.location.href='index.html';
+    }
+}

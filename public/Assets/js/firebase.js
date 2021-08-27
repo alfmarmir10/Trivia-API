@@ -12,3 +12,4 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+const functions = firebase.functions().useEmulator("localhost", 5001);

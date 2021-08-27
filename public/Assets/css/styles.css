@@ -45,6 +45,7 @@
     border-radius: 500%;
     margin-right: 10px;
     box-shadow: 0px 0px 3px 0px black;
+    background-color: white;
 }
 
 .toast{
@@ -113,4 +114,49 @@
 
 .imgCalificacion{
     width: 30%;
+}
+
+.loader-container{
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.loader {
+    position: absolute;
+    top: 33%;
+    left: 33%;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid red;
+    width: 25vw;
+    height: 25vw;
+    -webkit-animation: spin 1.5s linear infinite;
+    /*Safari*/animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+.signOut-container{
+    position: absolute;
+    top: 1vh;
+    right: 6vw;
+}
+
+.singOut-img{
+    width: 6vw;
 }
